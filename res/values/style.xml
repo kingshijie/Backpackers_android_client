@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <drawable name="background">#efefef</drawable>
+    <color name="text_color">#000000</color>
+    <dimen name="text_title">40dp</dimen>
+    <dimen name="text_large">30dp</dimen>
+    <dimen name="text_middle">22dp</dimen>
+    <dimen name="text_small">16dp</dimen>
+    
+</resources>

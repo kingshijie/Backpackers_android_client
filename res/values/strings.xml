@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, Backpackers!</string>
+    <string name="app_name">背包客</string>
+    <string name="username">用户名</string>
+    <string name="password">密  码</string>
+    <string name="login_title">登      录</string>
+    <string name="rmb_pwd">记住密码</string>
+    <string name="auto_login">自动登录</string>
+    <string name="log_btn">登        录</string>
+    <string name="username_hint">请输入您的用户名</string>
+    <string name="password_hint">请输入您的密码</string>
+    <string name="user_info_btn">用户信息</string>
+    <string name="contribute_btn">贡献力量</string>
+    <string name="search_btn">查询信息</string>
+    <string name="contribute_title">争做背包客</string>
+    <string name="contribute_hostels_btn">新旅店</string>
+    <string name="contribute_campings_btn">新露营点</string>
+    <string name="contribute_sceneries_btn">新风景点</string>
+    <string name="contribute_tips">欢迎踊跃上传哦，争做背包NO.1</string>
+    <string name="item_name">名称</string>
+    <string name="item_description">详细描述</string>
+    <string name="item_notice">注意</string>
+    <string name="item_name_hint">要写全称哦</string>
+    <string name="item_description_hint">这地方咋样，舒适不，好玩不，有啥特色吗，推荐大家来吗？ ... ...</string>
+    <string name="item_notice_hint">这地方安全吗？卫生条件如何？有什么需要提前准备的东西吗？ ... ...</string>
+    <string name="item_location">当前位置：</string>
+    <string name="item_add">我写完了，给我传上去</string>
+
+</resources>

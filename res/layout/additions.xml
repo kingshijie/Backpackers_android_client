@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp" >
+
+        <TextView
+            android:id="@+id/location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/item_location"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/text_middle" />
+
+        <TextView
+            android:id="@+id/display_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/text_middle" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp" >
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="@string/item_name"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/text_middle" />
+
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/item_name_hint"
+            android:maxLength="15" >
+
+            <requestFocus />
+        </EditText>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/item_description"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/text_middle"
+        android:layout_marginTop="10dp" />
+
+    <EditText
+        android:id="@+id/description"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/item_description_hint"
+        android:inputType="textMultiLine"
+        android:lines="6"
+        android:maxLength="140"
+        android:gravity="top|left" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="@string/item_notice"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/text_middle"
+        android:layout_marginTop="10dp" />
+
+    <EditText
+        android:id="@+id/notice"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/item_notice_hint"
+        android:inputType="textMultiLine"
+        android:lines="2"
+        android:maxLength="140"
+        android:gravity="top|left" />
+    <Button
+        android:id="@+id/finish"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/item_add"
+        android:textSize="@dimen/text_middle"
+        android:layout_marginTop="10dp" />
+
+</LinearLayout>
