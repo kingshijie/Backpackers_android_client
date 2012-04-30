@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -25,7 +26,6 @@ import android.widget.Toast;
 import com.kingshijie.backpackers.util.HttpConnector;
 
 public class Login extends Activity {
-	
 
 	public static final Integer LOGIN_SUCCESS = new Integer(1);
 	public static final Integer LOGIN_FAIL = new Integer(0);
@@ -59,6 +59,13 @@ public class Login extends Activity {
 				Context.MODE_PRIVATE);
 		boolean rmb_pwd = sharedPreferences.getBoolean("rmb_pwd", false);
 		boolean auto_login = sharedPreferences.getBoolean("auto_login", false);
+		// 如果不需要登录
+		if (auto_login && sharedPreferences.getLong("user_id", 0) != 0) {
+			// 调用登录activity
+			Intent intent = new Intent(this, Backpackers.class);
+			startActivity(intent);
+			finish();
+		}
 		// 设置选项状态
 		if (rmb_pwd) {
 			mRmbPwd.setChecked(true);
@@ -72,9 +79,7 @@ public class Login extends Activity {
 		// 如果选中记住密码选项
 		if (mRmbPwd.isChecked()) {
 			String password = sharedPreferences.getString("password", "");
-			if (username.trim() != null && password.trim() != null) {
-				mPassword.setText(password);
-			}
+			mPassword.setText(password);
 		}
 
 		mLoginDialog = new ProgressDialog(Login.this);
@@ -85,16 +90,16 @@ public class Login extends Activity {
 		mLogin.setOnClickListener(new loginOnClick());
 
 	}
-	
-	public String checkForm(String username,String password){
-		if(username.trim().equals("")){
+
+	public String checkForm(String username, String password) {
+		if (username.trim().equals("")) {
 			return "用户名不能为空";
 		}
 		String reg = "^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";
-		if(!username.matches(reg)){
+		if (!username.matches(reg)) {
 			return "邮箱格式错误";
 		}
-		if(password.trim().equals("")){
+		if (password.trim().equals("")) {
 			return "密码不能为空";
 		}
 		return "success";
@@ -111,7 +116,6 @@ public class Login extends Activity {
 	}
 
 	private class LoginTask extends AsyncTask<Void, Void, String> {
-		
 
 		/*
 		 * (non-Javadoc)
@@ -124,13 +128,13 @@ public class Login extends Activity {
 			String uri = getResources().getString(R.string.server_address);
 			String username = mUsername.getText().toString();
 			String password = mPassword.getText().toString();
-			String checkResult = checkForm(username,password);
-			if(!checkResult.equals("success")){
+			String checkResult = checkForm(username, password);
+			if (!checkResult.equals("success")) {
 				return checkResult;
 			}
-			
+
 			List<NameValuePair> params = new ArrayList<NameValuePair>(4);
-			//Map<String, String> params = new HashMap<String, String>();
+			// Map<String, String> params = new HashMap<String, String>();
 			// 设置服务器端对应的Action
 			HttpConnector.setAction(params, "main", "android_login");
 			// 设置参数
@@ -144,7 +148,7 @@ public class Login extends Activity {
 					SharedPreferences.Editor editor = sharedPreferences.edit();
 					String stat = jsonResponse.getString("stat");
 					if (stat.equals("success")) {
-						//登录成功
+						// 登录成功
 						long user_id = jsonResponse.getLong("user_id");
 						username = jsonResponse.getString("username");
 						// 将数据存入sharedpreferences
@@ -153,12 +157,12 @@ public class Login extends Activity {
 						if (mRmbPwd.isChecked()) {
 							editor.putString("password", password);
 							editor.putBoolean("rmb_pwd", true);
-						}else{
+						} else {
 							editor.putBoolean("rmb_pwd", false);
 						}
 						if (mAutoLogin.isChecked()) {
 							editor.putBoolean("auto_login", true);
-						}else{
+						} else {
 							editor.putBoolean("auto_login", false);
 						}
 						// Commit the edits!
@@ -177,15 +181,17 @@ public class Login extends Activity {
 						}
 						// Commit the edits!
 						editor.commit();
-						//Toast.makeText(Login.this,jsonResponse.getString("err_msg"),Toast.LENGTH_SHORT).show();
+						// Toast.makeText(Login.this,jsonResponse.getString("err_msg"),Toast.LENGTH_SHORT).show();
 						return jsonResponse.getString("err_msg");
 					}
 				} else {
 					return "网络返回结果为空";
-					//Toast.makeText(Login.this, "网络返回结果为空", Toast.LENGTH_SHORT).show();
+					// Toast.makeText(Login.this, "网络返回结果为空",
+					// Toast.LENGTH_SHORT).show();
 				}
 			} catch (JSONException e) {
-				//Toast.makeText(Login.this, "登陆失败", Toast.LENGTH_SHORT).show();
+				// Toast.makeText(Login.this, "登陆失败",
+				// Toast.LENGTH_SHORT).show();
 				e.printStackTrace();
 				return "登陆失败";
 			}
@@ -199,11 +205,13 @@ public class Login extends Activity {
 		@Override
 		protected void onPostExecute(String result) {
 			mLoginDialog.dismiss();
-			if(result.equals("success")){
-				//登录成功的操作
+			if (result.equals("success")) {
+				// 登录成功的操作
+				Intent intent = new Intent(Login.this, Backpackers.class);
+				startActivity(intent);
 				finish();
-			}else{
-				//登录失败的情况
+			} else {
+				// 登录失败的情况
 				Toast.makeText(Login.this, result, Toast.LENGTH_SHORT).show();
 			}
 		}

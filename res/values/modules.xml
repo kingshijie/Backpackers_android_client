@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="modules">
+        <item >旅店</item>
+        <item >露营点</item>
+        <item >旅游点</item>
+    </string-array>
+    
+</resources>
