@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="report_choices">
+        <item >地址信息不正确</item>
+        <item >地址内容不真实</item>
+        <item >内容包含不和谐因素</item>
+    </string-array>
+    
+</resources>

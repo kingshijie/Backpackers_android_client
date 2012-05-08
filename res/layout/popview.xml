@@ -5,9 +5,23 @@
     android:layout_height="fill_parent"  
     android:paddingBottom="25dip"
     >   
-<ImageView     
+<!-- <ImageView     
     android:id="@+id/image"  
     android:layout_width="wrap_content"    
     android:layout_height="wrap_content"    
-    android:src="@drawable/pop" />   
+    android:src="@drawable/pop" />    -->
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_small"
+        android:paddingTop="8dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="30dp"
+        android:text=""
+        android:textColor="#000000"
+        android:background="@drawable/pop" />
+ 
 </LinearLayout>  

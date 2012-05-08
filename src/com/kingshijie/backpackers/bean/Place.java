@@ -1,9 +1,9 @@
-package com.kingshijie.backpackers.util;
+package com.kingshijie.backpackers.bean;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Place implements Parcelable ,Comparable<Place>{
+public class Place extends GPoint implements Comparable<Place>{
 	public Place(long id, double x, double y, String name, double distance) {
 		this.id = id;
 		this.x = x;
@@ -16,87 +16,82 @@ public class Place implements Parcelable ,Comparable<Place>{
 
 	}
 
-	private long id;
-	private double x;
-	private double y;
-	private String name;
 	private String description;
 	private String notice;
-	private double distance;
+	private int score;
+	private int voted;
+	private String city;
+	private long user_id;
+	private String username;
 
 	/**
-	 * @return the id
+	 * @return the score
 	 */
-	public long getId() {
-		return id;
+	public int getScore() {
+		return score;
 	}
 
 	/**
-	 * @param id
-	 *            the id to set
+	 * @param score the score to set
 	 */
-	public void setId(long id) {
-		this.id = id;
+	public void setScore(int score) {
+		this.score = score;
 	}
 
 	/**
-	 * @return the distance
+	 * @return the voted
 	 */
-	public double getDistance() {
-		return distance;
+	public int getVoted() {
+		return voted;
 	}
 
 	/**
-	 * @param distance
-	 *            the distance to set
+	 * @param voted the voted to set
 	 */
-	public void setDistance(double distance) {
-		this.distance = distance;
+	public void setVoted(int voted) {
+		this.voted = voted;
 	}
 
 	/**
-	 * @return the x
+	 * @return the city
 	 */
-	public double getX() {
-		return x;
+	public String getCity() {
+		return city;
 	}
 
 	/**
-	 * @param x
-	 *            the x to set
+	 * @param city the city to set
 	 */
-	public void setX(double x) {
-		this.x = x;
+	public void setCity(String city) {
+		this.city = city;
 	}
 
 	/**
-	 * @return the y
+	 * @return the user_id
 	 */
-	public double getY() {
-		return y;
+	public long getUser_id() {
+		return user_id;
 	}
 
 	/**
-	 * @param y
-	 *            the y to set
+	 * @param user_id the user_id to set
 	 */
-	public void setY(double y) {
-		this.y = y;
+	public void setUser_id(long user_id) {
+		this.user_id = user_id;
 	}
 
 	/**
-	 * @return the name
+	 * @return the username
 	 */
-	public String getName() {
-		return name;
+	public String getUsername() {
+		return username;
 	}
 
 	/**
-	 * @param name
-	 *            the name to set
+	 * @param username the username to set
 	 */
-	public void setName(String name) {
-		this.name = name;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	/**
@@ -137,9 +132,14 @@ public class Place implements Parcelable ,Comparable<Place>{
 			p.x = source.readDouble();
 			p.y = source.readDouble();
 			p.name = source.readString();
+			p.distance = source.readDouble();
 			p.description = source.readString();
 			p.notice = source.readString();
-			p.distance = source.readDouble();
+			p.score = source.readInt();
+			p.voted = source.readInt();
+			p.city = source.readString();
+			p.user_id = source.readLong();
+			p.username = source.readString();
 			return p;
 		}
 
@@ -161,9 +161,14 @@ public class Place implements Parcelable ,Comparable<Place>{
 		dest.writeDouble(x);
 		dest.writeDouble(y);
 		dest.writeString(name);
+		dest.writeDouble(distance);
 		dest.writeString(description);
 		dest.writeString(notice);
-		dest.writeDouble(distance);
+		dest.writeInt(score);
+		dest.writeInt(voted);
+		dest.writeString(city);
+		dest.writeLong(user_id);
+		dest.writeString(username);
 	}
 
 

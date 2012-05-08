@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+import com.kingshijie.backpackers.util.ServerHelper;
+
 public class Contribute extends Activity {
 	
 	private Button mHostelsBtn;
@@ -38,6 +40,9 @@ public class Contribute extends Activity {
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			Intent intent = new Intent(Contribute.this,Additions.class);
+			Bundle bdl = new Bundle();
+			bdl.putString("ctrl", ServerHelper.hostelController);
+			intent.putExtras(bdl);
 			startActivity(intent);
 		}
 		
@@ -48,6 +53,9 @@ public class Contribute extends Activity {
 		@Override
 		public void onClick(View v) {
 			Intent intent = new Intent(Contribute.this,Additions.class);
+			Bundle bdl = new Bundle();
+			bdl.putString("ctrl", ServerHelper.campingController);
+			intent.putExtras(bdl);
 			startActivity(intent);
 		}
 		
@@ -59,6 +67,9 @@ public class Contribute extends Activity {
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			Intent intent = new Intent(Contribute.this,Additions.class);
+			Bundle bdl = new Bundle();
+			bdl.putString("ctrl", ServerHelper.sceneryController);
+			intent.putExtras(bdl);
 			startActivity(intent);
 		}
 		

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="onTravelOn">旅行中</string>
+    <string name="onTravelOff">蛰伏中</string>
+    <string name="onListeningOn">接收事件</string>
+    <string name="onListeningOff">屏蔽事件</string>
+    
+</resources>

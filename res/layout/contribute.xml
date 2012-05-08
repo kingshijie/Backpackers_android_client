@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="@color/background"
     android:orientation="vertical" >
 
     <TextView
@@ -10,41 +11,77 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/contribute_title"
-        android:textSize="@dimen/text_title" />
+        android:textSize="@dimen/text_title"
+        android:textColor="@color/white" />
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linearLayout6"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="我要上传："
-        android:textSize="@dimen/text_small" />
+        android:gravity="center" >
 
-    <Button
-        android:id="@+id/hostels"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/contribute_hostels_btn"
-        android:textSize="@dimen/text_middle" />
+        <Button
+            android:id="@+id/hostels"
+            android:layout_width="@dimen/rec_width"
+            android:layout_height="@dimen/rec_height"
+            android:layout_margin="@dimen/space"
+            android:background="@color/lightblue"
+            android:text="@string/contribute_hostels_btn"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_middle" />
 
-    <Button
-        android:id="@+id/campings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/contribute_campings_btn"
-        android:textSize="@dimen/text_middle" />
+        <Button
+            android:id="@+id/campings"
+            android:layout_width="@dimen/rec_width"
+            android:layout_height="@dimen/rec_height"
+            android:layout_margin="@dimen/space"
+            android:background="@color/red"
+            android:text="@string/contribute_campings_btn"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_middle" />
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/sceneries"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/contribute_sceneries_btn"
-        android:textSize="@dimen/text_middle" />
+        android:gravity="center" >
 
-    <TextView
-        android:id="@+id/tips"
-        android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/sceneries"
+            android:layout_width="@dimen/rec_width"
+            android:layout_height="@dimen/rec_height"
+            android:layout_margin="@dimen/space"
+            android:background="@color/lightgreen"
+            android:text="@string/contribute_sceneries_btn"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_middle" />
+
+        <Button
+            android:id="@+id/shops"
+            android:layout_width="@dimen/rec_width"
+            android:layout_height="@dimen/rec_height"
+            android:layout_margin="@dimen/space"
+            android:background="@color/darkblue"
+            android:text="@string/contribute_shops_btn"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_middle" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout7"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/contribute_tips"
-        android:textSize="@dimen/text_small" />
+        android:gravity="center" >
+
+        <TextView
+            android:id="@+id/tips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/contribute_tips"
+            android:textColor="@color/white"
+            android:layout_marginTop="8dp"
+            android:textSize="@dimen/text_small" />
+    </LinearLayout>
 
 </LinearLayout>

@@ -4,13 +4,11 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:background="@color/background" >
-
     <LinearLayout
         android:id="@+id/linearLayout1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center" >
-
 
         <Button
             android:id="@+id/show_in_map"
@@ -21,6 +19,16 @@
             android:background="@color/orange"
             android:textColor="@color/text_color"
             android:textSize="@dimen/text_small" />
+
+        <Button
+            android:id="@+id/publishevent"
+            android:layout_width="@dimen/rec_width"
+            android:layout_height="@dimen/one_line_height"
+            android:text="@string/publish"
+            android:layout_margin="@dimen/space"
+            android:background="@color/lightgreen"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/text_small"  />
 
     </LinearLayout>
 

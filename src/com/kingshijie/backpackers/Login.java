@@ -24,6 +24,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.kingshijie.backpackers.util.HttpConnector;
+import com.kingshijie.backpackers.util.ServerHelper;
 
 public class Login extends Activity {
 
@@ -136,7 +137,7 @@ public class Login extends Activity {
 			List<NameValuePair> params = new ArrayList<NameValuePair>(4);
 			// Map<String, String> params = new HashMap<String, String>();
 			// 设置服务器端对应的Action
-			HttpConnector.setAction(params, "main", "android_login");
+			HttpConnector.setAction(params, ServerHelper.userController, ServerHelper.loginAction);
 			// 设置参数
 			params.add(new BasicNameValuePair("username", username));
 			params.add(new BasicNameValuePair("password", password));
@@ -147,7 +148,7 @@ public class Login extends Activity {
 							"settings", Context.MODE_PRIVATE);
 					SharedPreferences.Editor editor = sharedPreferences.edit();
 					String stat = jsonResponse.getString("stat");
-					if (stat.equals("success")) {
+					if (stat != null && stat.equals("success")) {
 						// 登录成功
 						long user_id = jsonResponse.getLong("user_id");
 						username = jsonResponse.getString("username");

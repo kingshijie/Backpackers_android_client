@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/background"
+    android:background="@color/background"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -58,45 +58,50 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="@string/item_description"
         android:textColor="@color/text_color"
-        android:textSize="@dimen/text_middle"
-        android:layout_marginTop="10dp" />
+        android:textSize="@dimen/text_middle" />
 
     <EditText
         android:id="@+id/description"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:gravity="top|left"
         android:hint="@string/item_description_hint"
         android:inputType="textMultiLine"
-        android:lines="6"
-        android:maxLength="140"
-        android:gravity="top|left" />
+        android:lines="3"
+        android:maxLength="140" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="@string/item_notice"
         android:textColor="@color/text_color"
-        android:textSize="@dimen/text_middle"
-        android:layout_marginTop="10dp" />
+        android:textSize="@dimen/text_middle" />
 
     <EditText
         android:id="@+id/notice"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:gravity="top|left"
         android:hint="@string/item_notice_hint"
         android:inputType="textMultiLine"
         android:lines="2"
-        android:maxLength="140"
-        android:gravity="top|left" />
+        android:maxLength="140" />
+
     <Button
         android:id="@+id/finish"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/one_line_width"
+        android:layout_height="@dimen/one_line_height"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@color/red"
+        android:padding="@dimen/space"
         android:text="@string/item_add"
-        android:textSize="@dimen/text_middle"
-        android:layout_marginTop="10dp" />
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/text_middle" />
 
 </LinearLayout>

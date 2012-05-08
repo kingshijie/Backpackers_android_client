@@ -12,9 +12,9 @@
     <string name="username_hint">请输入您的用户名</string>
     <string name="password_hint">请输入您的密码</string>
     <string name="user_info_btn">用户信息</string>
-    <string name="contribute_btn">贡献力量</string>
-    <string name="search_btn">查询信息</string>
-    <string name="contribute_title">争做背包客</string>
+    <string name="contribute_btn">有新发现</string>
+    <string name="search_btn">周边搜索</string>
+    <string name="contribute_title">上传我的发现</string>
     <string name="contribute_hostels_btn">新旅店</string>
     <string name="contribute_campings_btn">新露营点</string>
     <string name="contribute_sceneries_btn">新风景点</string>
@@ -26,13 +26,20 @@
     <string name="item_description_hint">这地方咋样，舒适不，好玩不，有啥特色吗，推荐大家来吗？ ... ...</string>
     <string name="item_notice_hint">这地方安全吗？卫生条件如何？有什么需要提前准备的东西吗？ ... ...</string>
     <string name="item_location">当前位置：</string>
-    <string name="item_add">我写完了，给我传上去</string>
+    <string name="item_add">写完了，上传</string>
     <string name="search_keyword">关键字</string>
     <string name="search_module">项目</string>
     <string name="search_distance">距离</string>
     <string name="search_go">搜索</string>
     <string name="search_result">查询结果</string>
-    <string name="show_in_map">在地图上显示</string>
+    <string name="show_in_map">地图上察看结果</string>
+    <string name="user_show_in_map">地图上察看周边背包客</string>
     <string name="search_key_hint">检索名称，可以为空</string>
+    <string name="rating">评分</string>
+    <string name="fetch_route">获取路线</string>
+    <string name="report">信息不符</string>
+    <string name="event_btn">察看事件</string>
+    <string name="contribute_shops_btn">新购物点</string>
+    <string name="search_tips">搜索您当前位置的周边某个距离内的项目。</string>
 
 </resources>

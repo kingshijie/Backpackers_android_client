@@ -10,15 +10,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,25 +28,16 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.baidu.mapapi.BMapManager;
-import com.baidu.mapapi.GeoPoint;
-import com.baidu.mapapi.LocationListener;
-import com.baidu.mapapi.MKAddrInfo;
-import com.baidu.mapapi.MKDrivingRouteResult;
-import com.baidu.mapapi.MKGeocoderAddressComponent;
-import com.baidu.mapapi.MKPoiResult;
-import com.baidu.mapapi.MKSearch;
-import com.baidu.mapapi.MKSearchListener;
-import com.baidu.mapapi.MKTransitRouteResult;
-import com.baidu.mapapi.MKWalkingRouteResult;
+import com.kingshijie.backpackers.bean.Place;
+import com.kingshijie.backpackers.map.BasicLocatorActivity;
 import com.kingshijie.backpackers.util.DistanceCalculator;
 import com.kingshijie.backpackers.util.HttpConnector;
-import com.kingshijie.backpackers.util.Place;
+import com.kingshijie.backpackers.util.ServerHelper;
 
-public class Search extends Activity {
+public class Search extends BasicLocatorActivity {
 
-	private final String _controller = "module_scenery";
-	private final String _action = "android_search_near";
+	private String _controller = ServerHelper.hostelController;
+	private final String _action = ServerHelper.searchNearAction;
 	private final int maxDis = 29;
 	private final int defaultDis = 3;
 
@@ -56,12 +47,6 @@ public class Search extends Activity {
 	private SeekBar mDistance;
 	private TextView mDisplayDistance;
 	private Button searchGo;
-	private TextView display_location;
-
-	private BMapApiApp mApp;
-	private LocationListener mLocationListener;
-	private double mX, mY;
-	private MKSearch mMKSearch;
 
 	/*
 	 * (non-Javadoc)
@@ -74,12 +59,15 @@ public class Search extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.search);
 
+		// 继承自父类的显示当前位置信息的文本
+		mWhereTextView = (TextView) findViewById(R.id.display_location);
+
+		// 自身的控件
 		mModule = (Spinner) findViewById(R.id.module);
 		mKeyWord = (EditText) findViewById(R.id.key_word);
 		mDistance = (SeekBar) findViewById(R.id.distance);
 		mDisplayDistance = (TextView) findViewById(R.id.display_distance);
 		searchGo = (Button) findViewById(R.id.search);
-		display_location = (TextView) findViewById(R.id.display_location);
 
 		mDistance.setMax(maxDis);
 		mDistance.setProgress(defaultDis);
@@ -90,6 +78,7 @@ public class Search extends Activity {
 				this, R.array.modules, android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		mModule.setAdapter(adapter);
+		mModule.setOnItemSelectedListener(new changeModule());
 
 		searchGo.setOnClickListener(new GoSearch());
 
@@ -97,65 +86,6 @@ public class Search extends Activity {
 		mLoadingDialog.setCancelable(true);
 		mLoadingDialog.setMessage("搜索中，请稍后...");
 
-		// 获取当前位置
-		mApp = (BMapApiApp) this.getApplication();
-		if (mApp.mBMapMan == null) {
-			mApp.mBMapMan = new BMapManager(getApplication());
-			mApp.mBMapMan
-					.init(mApp.mStrKey, new BMapApiApp.MyGeneralListener());
-		}
-		mApp.mBMapMan.start();
-
-		// 注册监听
-		mLocationListener = new LocationListener() {
-			@Override
-			public void onLocationChanged(Location location) {
-				mX = location.getLatitude();
-				mY = location.getLongitude();
-				mMKSearch.reverseGeocode(new GeoPoint((int) (mX * 1E6),
-						(int) (mY * 1E6)));
-				Log.v("location", String.format("(%.2f,%.2f)", mX, mY));
-			}
-		};
-		// 初始化搜索类
-		mMKSearch = new MKSearch();
-		mMKSearch.init(mApp.mBMapMan, new MySearchListener());// 注意，MKSearchListener只支持一个，以最后一次设置为准
-
-	}
-
-	/**
-	 * 百度地图搜索接口的实现
-	 * 
-	 * @author aaron
-	 * 
-	 */
-	public class MySearchListener implements MKSearchListener {
-		@Override
-		public void onGetAddrResult(MKAddrInfo result, int iError) {
-			if (iError != 0) {
-				String str = String.format("网络错误，错误号%d", iError);
-				Toast.makeText(Search.this, str, Toast.LENGTH_LONG).show();
-				return;
-			}
-			MKGeocoderAddressComponent addr = result.addressComponents;
-			display_location.setText(addr.province + addr.city + addr.street);
-		}
-
-		@Override
-		public void onGetDrivingRouteResult(MKDrivingRouteResult arg0, int arg1) {
-		}
-
-		@Override
-		public void onGetPoiResult(MKPoiResult arg0, int arg1, int arg2) {
-		}
-
-		@Override
-		public void onGetTransitRouteResult(MKTransitRouteResult arg0, int arg1) {
-		}
-
-		@Override
-		public void onGetWalkingRouteResult(MKWalkingRouteResult arg0, int arg1) {
-		}
 	}
 
 	/**
@@ -181,10 +111,26 @@ public class Search extends Activity {
 		}
 	}
 
+	private class changeModule implements OnItemSelectedListener {
+
+		@Override
+		public void onItemSelected(AdapterView<?> parent, View view,
+				int position, long id) {
+			_controller = ServerHelper.getControllerByName(parent.getItemAtPosition(
+					position).toString());
+		}
+
+		@Override
+		public void onNothingSelected(AdapterView<?> arg0) {
+
+		}
+
+	}
+
 	private class GoSearch implements OnClickListener {
 
 		/*
-		 * (non-Javadoc)
+		 * 执行获取地点信息的操作
 		 * 
 		 * @see android.view.View.OnClickListener#onClick(android.view.View)
 		 */
@@ -204,7 +150,7 @@ public class Search extends Activity {
 	private class FetchDataTask extends AsyncTask<Void, Void, ArrayList<Place>> {
 
 		/*
-		 * (non-Javadoc)
+		 * 显示等待的dialog
 		 * 
 		 * @see android.os.AsyncTask#onPreExecute()
 		 */
@@ -214,7 +160,7 @@ public class Search extends Activity {
 		}
 
 		/*
-		 * (non-Javadoc)
+		 * 后台操作，包括网络传输，数据封装
 		 * 
 		 * @see android.os.AsyncTask#doInBackground(Params[])
 		 */
@@ -235,7 +181,7 @@ public class Search extends Activity {
 			params.add(new BasicNameValuePair("y", String.valueOf(mY)));
 			params.add(new BasicNameValuePair("range", String
 					.valueOf(DistanceCalculator.getRange(dis))));
-			params.add(new BasicNameValuePair("key_word",keyWord));
+			params.add(new BasicNameValuePair("key_word", keyWord));
 			JSONObject jsonResponse = HttpConnector.doPost(uri, params);
 			try {
 				if (jsonResponse != null) {
@@ -248,9 +194,10 @@ public class Search extends Activity {
 						double x = one.getDouble("x");
 						double y = one.getDouble("y");
 						String name = one.getString("name");
-						double distance = DistanceCalculator.GetCoarseDistance(mX, mY, x, y);
-						if(distance <= dis){
-							Place p = new Place(id,x,y,name,distance);
+						double distance = DistanceCalculator.GetCoarseDistance(
+								mX, mY, x, y);
+						if (distance <= dis) {
+							Place p = new Place(id, x, y, name, distance);
 							places.add(p);
 						}
 					}
@@ -266,38 +213,25 @@ public class Search extends Activity {
 		}
 
 		/*
-		 * (non-Javadoc)
+		 * 是否跳转到结果list
 		 * 
 		 * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
 		 */
 		protected void onPostExecute(ArrayList<Place> result) {
 			mLoadingDialog.dismiss();
 			if (result != null) {
-				mLoadingDialog.dismiss();
 				Intent intent = new Intent(Search.this, ItemList.class);
 				Bundle bdl = new Bundle();
-				//Place类实现Parcelable接口
-				bdl.putParcelableArrayList("places", result);
+				// Place类实现Parcelable接口
+				bdl.putParcelableArrayList("GPOINT", result);
+				bdl.putString("ctrl", _controller);
 				intent.putExtras(bdl);
 				startActivity(intent);
 			} else {
+				Toast.makeText(Search.this, "没有你要找的内容诶", Toast.LENGTH_LONG).show();
 			}
 		}
 
 	}
 
-	@Override
-	protected void onPause() {
-		mApp.mBMapMan.getLocationManager().removeUpdates(mLocationListener);
-		mApp.mBMapMan.stop();
-		super.onPause();
-	}
-
-	@Override
-	protected void onResume() {
-		mApp.mBMapMan.getLocationManager().requestLocationUpdates(
-				mLocationListener);
-		mApp.mBMapMan.start();
-		super.onResume();
-	}
 }

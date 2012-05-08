@@ -9,14 +9,15 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.kingshijie.backpackers.bean.GPoint;
 
-public class SearchResultAdapter extends ArrayAdapter<Place> {
-	private ArrayList<Place> items;
+
+public class SearchResultAdapter extends ArrayAdapter<GPoint>{
+	private ArrayList<? extends GPoint> items;
 	private Context context;
-
 	public SearchResultAdapter(Context context, int textViewResourceId,
-			ArrayList<Place> items) {
-		super(context, textViewResourceId, items);
+			ArrayList<? extends GPoint> items) {
+		super(context, textViewResourceId);
 		this.context = context;
 		this.items = items;
 	}
@@ -29,7 +30,7 @@ public class SearchResultAdapter extends ArrayAdapter<Place> {
 			view = inflater.inflate(android.R.layout.two_line_list_item, null);
 		}
 
-		Place item = items.get(position);
+		GPoint item = items.get(position);
 		if (item != null) {
 			TextView name = (TextView) view.findViewById(android.R.id.text1);
 			TextView dis = (TextView) view.findViewById(android.R.id.text2);
@@ -44,4 +45,13 @@ public class SearchResultAdapter extends ArrayAdapter<Place> {
 
 		return view;
 	}
+
+	/* (non-Javadoc)
+	 * @see android.widget.ArrayAdapter#getCount()
+	 */
+	@Override
+	public int getCount() {
+		return items.size();
+	}
+	
 }

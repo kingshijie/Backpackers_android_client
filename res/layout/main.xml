@@ -1,26 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="vertical" android:layout_width="fill_parent"
-	android:layout_height="fill_parent">
-	<TextView android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:text="@string/hello" />
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/background"
+    android:orientation="vertical" >
 
-	<Button
-	    android:id="@+id/user_info"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:text="@string/user_info_btn" />
+    <LinearLayout
+        android:id="@+id/linearLayout6"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center" >
 
-	<Button
-	    android:id="@+id/contribute"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:text="@string/contribute_btn" />
+        <TextView
+            android:id="@+id/display_location_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/space"
+            android:text="当前位置:"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_middle" />
+        <TextView
+            android:id="@+id/display_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space"
+            android:layout_marginBottom="@dimen/space"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_middle" />
+    </LinearLayout>
 
-	<Button
-	    android:id="@+id/search"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:text="@string/search_btn" />
-	
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center" >
+
+        <ToggleButton
+            android:id="@+id/onTravel"
+            android:layout_width="@dimen/rec_width"
+            android:layout_height="@dimen/rec_height"
+            android:layout_margin="@dimen/space"
+            android:background="@color/red"
+            android:onClick="onTravelClicked"
+            android:textColor="@color/white"
+            android:textOff="@string/onTravelOff"
+            android:textOn="@string/onTravelOn"
+            android:textSize="@dimen/text_middle" />
+
+        <ToggleButton
+            android:id="@+id/onListening"
+            android:layout_width="@dimen/rec_width"
+            android:layout_height="@dimen/rec_height"
+            android:layout_margin="@dimen/space"
+            android:background="@color/darkblue"
+            android:onClick="onListeningClicked"
+            android:textColor="@color/white"
+            android:textOff="@string/onListeningOff"
+            android:textOn="@string/onListeningOn"
+            android:textSize="@dimen/text_middle" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center" >
+
+        <Button
+            android:id="@+id/event"
+            android:layout_width="@dimen/rec_width"
+            android:layout_height="@dimen/rec_height"
+            android:layout_margin="@dimen/space"
+            android:background="@color/lightblue"
+            android:text="@string/event_btn"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_middle" />
+
+        <Button
+            android:id="@+id/user_info"
+            android:layout_width="@dimen/rec_width"
+            android:layout_height="@dimen/rec_height"
+            android:layout_margin="@dimen/space"
+            android:background="@color/darkgreen"
+            android:text="@string/user_info_btn"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_middle" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center" >
+
+        <Button
+            android:id="@+id/contribute"
+            android:layout_width="@dimen/rec_width"
+            android:layout_height="@dimen/rec_height"
+            android:layout_margin="@dimen/space"
+            android:background="@color/black"
+            android:text="@string/contribute_btn"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_middle" />
+
+        <Button
+            android:id="@+id/search"
+            android:layout_width="@dimen/rec_width"
+            android:layout_height="@dimen/rec_height"
+            android:layout_margin="@dimen/space"
+            android:background="@color/pinkred"
+            android:text="@string/search_btn"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_middle" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center" >
+
+        <Button
+            android:id="@+id/show_in_map"
+            android:text="@string/user_show_in_map"
+            android:layout_width="@dimen/one_line_width"
+            android:layout_height="@dimen/one_line_height"
+            android:layout_margin="@dimen/space"
+            android:background="@color/orange"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_middle" />
+    </LinearLayout>
+
 </LinearLayout>

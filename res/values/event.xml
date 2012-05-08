@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="name">活动代号</string>
+    <string name="destination">目的地</string>
+    <string name="user">发起人</string>
+    <string name="time">活动时间</string>
+    <string name="time_btn">点我设置</string>
+    <string name="spot">集合地点</string>
+    <string name="contact">联系方式</string>
+    <string name="content">活动说明</string>
+    <string name="publish">发布新事件</string>
+    <string name="name_hint">起个显眼的活动代号吧</string>
+    <string name="destination_hint">活动地点</string>
+    <string name="spot_hint">可以发布也可以详谈</string>
+    <string name="contact_hint"> 写下自己的手机号，QQ，微信等信息吧，方便联系</string>
+    <string name="content_hint">活动的详细说明，能不能团到人就看这个了</string>
+    <string name="publish_btn">发布事件</string>
+    
+</resources>

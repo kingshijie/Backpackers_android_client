@@ -8,12 +8,9 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
-import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -21,37 +18,19 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.baidu.mapapi.BMapManager;
-import com.baidu.mapapi.GeoPoint;
-import com.baidu.mapapi.LocationListener;
-import com.baidu.mapapi.MKAddrInfo;
-import com.baidu.mapapi.MKDrivingRouteResult;
-import com.baidu.mapapi.MKGeocoderAddressComponent;
-import com.baidu.mapapi.MKPoiResult;
-import com.baidu.mapapi.MKSearch;
-import com.baidu.mapapi.MKSearchListener;
-import com.baidu.mapapi.MKTransitRouteResult;
-import com.baidu.mapapi.MKWalkingRouteResult;
+import com.kingshijie.backpackers.map.BasicLocatorActivity;
 import com.kingshijie.backpackers.util.HttpConnector;
+import com.kingshijie.backpackers.util.ServerHelper;
 
-public class Additions extends Activity {
+public class Additions extends BasicLocatorActivity {
 	private Button mFinishBtn;
 	private EditText mNameBtn;
 	private EditText mDescriptionBtn;
 	private EditText mNoticeBtn;
 	private ProgressDialog mDialog;
-	private TextView display_location;
 
-	private BMapApiApp mApp;
-	private LocationListener mLocationListener;
-
-	// TODO 可变
-	private final String _controller = "module_scenery";
-	private final String _action = "android_add_scenery";
-
-	private double mX, mY;
-	private String mCity;
-	private MKSearch mMKSearch;
+	private String _controller;
+	private final String _action = ServerHelper.addModuleAction;
 
 	/*
 	 * (non-Javadoc)
@@ -63,11 +42,16 @@ public class Additions extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.additions);
 
-		// TODO 检查是否开GPS
+		// 继承自父类的显示当前位置信息的文本
+		mWhereTextView = (TextView) findViewById(R.id.display_location);
+
+		// 获取接受请求的controller名称
+		Bundle bdl = getIntent().getExtras();
+		_controller = bdl.getString("ctrl");
+
 		mNameBtn = (EditText) findViewById(R.id.name);
 		mDescriptionBtn = (EditText) findViewById(R.id.description);
 		mNoticeBtn = (EditText) findViewById(R.id.notice);
-		display_location = (TextView) findViewById(R.id.display_location);
 
 		mFinishBtn = (Button) findViewById(R.id.finish);
 		mFinishBtn.setOnClickListener(new finishOnClick());
@@ -76,64 +60,6 @@ public class Additions extends Activity {
 		mDialog.setCancelable(true);
 		mDialog.setMessage("正在提交，马上好哦");
 
-		mApp = (BMapApiApp) this.getApplication();
-		if (mApp.mBMapMan == null) {
-			mApp.mBMapMan = new BMapManager(getApplication());
-			mApp.mBMapMan
-					.init(mApp.mStrKey, new BMapApiApp.MyGeneralListener());
-		}
-		mApp.mBMapMan.start();
-
-		// 注册监听
-		mLocationListener = new LocationListener() {
-			@Override
-			public void onLocationChanged(Location location) {
-				mX = location.getLatitude();
-				mY = location.getLongitude();
-				mMKSearch.reverseGeocode(new GeoPoint((int) (mX * 1E6),
-						(int) (mY * 1E6)));
-				Log.v("location", String.format("(%.2f,%.2f)", mX, mY));
-			}
-		};
-		// 初始化搜索类
-		mMKSearch = new MKSearch();
-		mMKSearch.init(mApp.mBMapMan, new MySearchListener());// 注意，MKSearchListener只支持一个，以最后一次设置为准
-	}
-
-	/**
-	 * 百度地图搜索接口的实现
-	 * 
-	 * @author aaron
-	 * 
-	 */
-	public class MySearchListener implements MKSearchListener {
-		@Override
-		public void onGetAddrResult(MKAddrInfo result, int iError) {
-			if (iError != 0) {
-				String str = String.format("网络错误，错误号%d", iError);
-				Toast.makeText(Additions.this, str, Toast.LENGTH_LONG).show();
-				return;
-			}
-			MKGeocoderAddressComponent addr = result.addressComponents;
-			mCity = addr.city;
-			display_location.setText(addr.province + addr.city + addr.street);
-		}
-
-		@Override
-		public void onGetDrivingRouteResult(MKDrivingRouteResult arg0, int arg1) {
-		}
-
-		@Override
-		public void onGetPoiResult(MKPoiResult arg0, int arg1, int arg2) {
-		}
-
-		@Override
-		public void onGetTransitRouteResult(MKTransitRouteResult arg0, int arg1) {
-		}
-
-		@Override
-		public void onGetWalkingRouteResult(MKWalkingRouteResult arg0, int arg1) {
-		}
 	}
 
 	private class postTask extends AsyncTask<Void, Void, String> {
@@ -190,7 +116,7 @@ public class Additions extends Activity {
 						return jsonResponse.getString("err_msg");
 					}
 				} else {
-					return "网络返回结果为空";
+					return "网络返回结果错误";
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();
@@ -242,24 +168,8 @@ public class Additions extends Activity {
 
 		@Override
 		public void onClick(View v) {
-			// TODO 需要根据所需调用
 			new postTask().execute();
 		}
 
-	}
-
-	@Override
-	protected void onPause() {
-		mApp.mBMapMan.getLocationManager().removeUpdates(mLocationListener);
-		mApp.mBMapMan.stop();
-		super.onPause();
-	}
-
-	@Override
-	protected void onResume() {
-		mApp.mBMapMan.getLocationManager().requestLocationUpdates(
-				mLocationListener);
-		mApp.mBMapMan.start();
-		super.onResume();
 	}
 }
