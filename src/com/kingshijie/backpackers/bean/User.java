@@ -10,6 +10,39 @@ public class User extends GPoint{
 	protected int credit;
 	protected String interests;
 	protected int sex;
+	protected int additionNum;
+	protected int reportNum;
+
+	
+
+	/**
+	 * @return the additionNum
+	 */
+	public int getAdditionNum() {
+		return additionNum;
+	}
+
+	/**
+	 * @param additionNum the additionNum to set
+	 */
+	public void setAdditionNum(int additionNum) {
+		this.additionNum = additionNum;
+	}
+
+	/**
+	 * @return the reportNum
+	 */
+	public int getReportNum() {
+		return reportNum;
+	}
+
+	/**
+	 * @param reportNum the reportNum to set
+	 */
+	public void setReportNum(int reportNum) {
+		this.reportNum = reportNum;
+	}
+
 
 	/**
 	 * @return the sex
@@ -97,6 +130,8 @@ public class User extends GPoint{
 			user.credit = source.readInt();
 			user.interests = source.readString();
 			user.sex = source.readInt();
+			user.additionNum = source.readInt();
+			user.reportNum = source.readInt();
 			return user;
 		}
 
@@ -125,6 +160,8 @@ public class User extends GPoint{
 		user.writeInt(credit);
 		user.writeString(interests);
 		user.writeInt(sex);
+		user.writeInt(additionNum);
+		user.writeInt(reportNum);
 	}
 
 }

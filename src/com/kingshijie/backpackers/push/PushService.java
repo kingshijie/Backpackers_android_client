@@ -25,6 +25,7 @@ import com.ibm.mqtt.MqttPersistence;
 import com.ibm.mqtt.MqttPersistenceException;
 import com.ibm.mqtt.MqttSimpleCallback;
 import com.kingshijie.backpackers.EventActivity;
+import com.kingshijie.backpackers.R;
 
 /* 
  * PushService that does all of the work.
@@ -36,7 +37,7 @@ public class PushService extends Service {
 	public static final String TAG = "PushService";
 
 	// the IP address, where your MQTT broker is running.
-	private static final String MQTT_HOST = "209.124.50.174";
+	private final String MQTT_HOST = getResources().getString(R.string.push_server);
 	// the port at which the broker is running.
 	private static int MQTT_BROKER_PORT_NUM = 1883;
 	// Let's not use the MQTT persistence.

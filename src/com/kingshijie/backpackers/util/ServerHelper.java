@@ -5,10 +5,12 @@ public class ServerHelper {
 	public static String hostel = "旅店";
 	public static String camping = "露营点";
 	public static String scenery = "旅游点";
+	public static String shop = "购物点";
 	//模块对应的Controller名称
 	public static String hostelController = "module_hostel";
 	public static String campingController = "module_camping";
 	public static String sceneryController = "module_scenery";
+	public static String shopController = "module_shop";
 	public static String userController = "main";
 	public static String eventController = "event";
 	//远程提供的action名称
@@ -25,6 +27,7 @@ public class ServerHelper {
 	public static String fetchNearEventAction = "android_fetch_near_event";
 	public static String fetchEventAction = "android_fetch_event";
 	public static String publishEventAction = "android_publish_event";
+	public static String fetchUserInfoAction = "android_fetch_user_info";
 	
 	public static String getControllerByName(String moduleName){
 		if(moduleName.equals(hostel)){
@@ -33,6 +36,8 @@ public class ServerHelper {
 			return campingController;
 		}else if(moduleName.equals(scenery)){
 			return sceneryController;
+		}else if(moduleName.endsWith(shop)){
+			return shopController;
 		}
 		return null;
 	}
@@ -44,6 +49,8 @@ public class ServerHelper {
 			return camping;
 		}else if(ctrl.equals(sceneryController)){
 			return scenery;
+		}else if(ctrl.equals(shopController)){
+			return shop;
 		}
 		return null;
 	}

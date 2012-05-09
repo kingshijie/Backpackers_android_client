@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="server_address">http://192.168.1.200/Backpackers/index.php</string>
+    <string name="push_server">209.124.50.174</string>
     
 </resources>

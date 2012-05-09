@@ -125,7 +125,7 @@ public class Backpackers extends BasicLocatorActivity {
 
 		@Override
 		public void onClick(View v) {
-			Intent intent = new Intent(Backpackers.this, Map.class);
+			Intent intent = new Intent(Backpackers.this, UserInfo.class);
 			startActivity(intent);
 		}
 

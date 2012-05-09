@@ -93,6 +93,7 @@
             android:name=".push.PushService"
             android:label="事件推送" >
         </service>
+        <activity android:name=".UserInfo" android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

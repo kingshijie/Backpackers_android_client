@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="credit">积分</string>
+    <string name="level">等级</string>
+    <string name="addition_num">上传地点次数</string>
+    <string name="report_num">举报不符次数</string>
+    
+</resources>
